@@ -117,5 +117,10 @@ The assignment deliverable consists of a Github repository containing:
 
 
 # Design
-[ Your work goes here ] 
+## Host-A
+- Aggiunto l'indirizzo IP: 145.10.1.0/23 su interfaccia enp0s8
+- Attivo il collegamento della porta enp0s8
+- Elimino le rotte configurate automaticamente
+## Switch
+-
 
