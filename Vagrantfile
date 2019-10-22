@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
     hosta.vm.box = "ubuntu/bionic64"
     hosta.vm.hostname = "host-a"
     hosta.vm.network "private_network", virtualbox__intnet: "broadcast_host_a", auto_config: false
-    hosta.vm.provision "shell", path: "common.sh"
+    hosta.vm.provision "shell", path: "host-a.sh"
     hosta.vm.provider "virtualbox" do |vb|
       vb.memory = 256
     end
@@ -60,7 +60,7 @@ Vagrant.configure("2") do |config|
     hostb.vm.box = "ubuntu/bionic64"
     hostb.vm.hostname = "host-b"
     hostb.vm.network "private_network", virtualbox__intnet: "broadcast_host_b", auto_config: false
-    hostb.vm.provision "shell", path: "common.sh"
+    hostb.vm.provision "shell", path: "host-b.sh"
     hostb.vm.provider "virtualbox" do |vb|
       vb.memory = 256
     end
