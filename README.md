@@ -121,9 +121,17 @@ The assignment deliverable consists of a Github repository containing:
 - Aggiunto l'indirizzo IP: 145.10.1.0/23 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate automaticamente
+### Host-B
+- Aggiunto l'indirizzo IP: 145.11.1.0/24 su interfaccia enp0s8
+- Attivo il collegamento della porta enp0s8
+- Elimino le rotte configurate automaticamente
+### Host-C
+- Aggiunto l'indirizzo IP: 123.0.1.0/25 su interfaccia enp0s8
+- Attivo il collegamento della porta enp0s8
+- Elimino le rotte configurate automaticamente
 ### Switch
 - Inserisco il comando per ridefinire l'host in modo che lavori come uno switch
-- Aggiungo la porta enp0s8
+- Aggiungo la porta enp0s8 configurata sulla vlan taggata con 10
 - Attivo la porta appena creata
-- 
+
 
