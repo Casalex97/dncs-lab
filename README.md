@@ -122,12 +122,12 @@ The assignment deliverable consists of a Github repository containing:
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate automaticamente
 ### Host-B
-- Aggiunto l'indirizzo IP: 145.11.1.0/24 su interfaccia enp0s8
-- Attivo il collegamento della porta enp0s8
+- Aggiunto l'indirizzo IP: 145.11.1.0/24 su interfaccia enp0s9
+- Attivo il collegamento della porta enp0s9
 - Elimino le rotte configurate automaticamente
 ### Host-C
-- Aggiunto l'indirizzo IP: 123.0.1.0/25 su interfaccia enp0s8
-- Attivo il collegamento della porta enp0s8
+- Aggiunto l'indirizzo IP: 123.0.1.0/25 su interfaccia enp0s10
+- Attivo il collegamento della porta enp0s10
 - Elimino le rotte configurate automaticamente
 ### Switch
 - Inserisco il comando per ridefinire l'host in modo che lavori come uno switch
