@@ -116,18 +116,43 @@ The assignment deliverable consists of a Github repository containing:
 - https://www.vagrantup.com/intro/getting-started/
 
 
-# Design
-### Host-A
+# Assignment Design:
+
+### Indirizzamento IP:
+ Per avere il minore spreco possibile di indirizzi IP devo assegnare ai vari host e router le classi di indirizzi che permettono di ospitarne in numero immediatamente maggiore alla richiesta. In questo caso, ad esempio, per l'host-a si è dovuto assegnare, per rispettare i requisiti, una subnet che può contenere fino a 510 indirizzi utilizzabili. Perciò è possibile anche aggiungere molti altri host senza modificare la subnet-mask o le regole di routing. Di seguito i vari indirizzamenti:
+
+#### Host-A
+ Sono richiesti almeno 291 possibili indirizzi utilizzabili perciò assegno all'host-a l'indirizzo **145.10.1.1/23** in    questo modo la sottorete può supportare fino 510 indirizzi più uno di broadcast e uno di rete.
+
+#### Host-B
+ Sono richiesti almeno 176 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **145.11.1.0/24** in    questo modo la sottorete può supportare fino 254 indirizzi più uno di broadcast e uno di rete. 
+
+#### Host-C
+ Sono richiesti almeno 95 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **123.0.1.0/25** in      questo modo la sottorete può supportare fino 126 indirizzi più uno di broadcast e uno di rete. 
+
+#### Tra Router-1 e Router-2
+ Ai due router collegati è possibile assegnare una /30 rete, in questo caso ho assegnato al router-1 l'indirizzo **145.12.1.1/30** e al router-2 l'indirizzo **145.12.1.2/30**.
+
+### Impostazione delle VLAN:
+ 
+
+
+#### Configurazione host-A:
 - Aggiunto l'indirizzo IP: 145.10.1.0/23 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate automaticamente
+- 
+
+
+
+
 ### Host-B
-- Aggiunto l'indirizzo IP: 145.11.1.0/24 su interfaccia enp0s9
-- Attivo il collegamento della porta enp0s9
+- Aggiunto l'indirizzo IP: 145.11.1.0/24 su interfaccia enp0s8
+- Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate automaticamente
 ### Host-C
-- Aggiunto l'indirizzo IP: 123.0.1.0/25 su interfaccia enp0s10
-- Attivo il collegamento della porta enp0s10
+- Aggiunto l'indirizzo IP: 123.0.1.0/25 su interfaccia enp0s8
+- Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate automaticamente
 ### Switch
 - Inserisco il comando per ridefinire l'host in modo che lavori come uno switch
