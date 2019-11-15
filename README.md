@@ -121,47 +121,59 @@ The assignment deliverable consists of a Github repository containing:
 ### Indirizzamento IP:
  Per avere il minore spreco possibile di indirizzi IP devo assegnare ai vari host e router le classi di indirizzi che permettono di ospitarne in numero immediatamente maggiore alla richiesta. In questo caso, ad esempio, per l'host-a si è dovuto assegnare, per rispettare i requisiti, una subnet che può contenere fino a 510 indirizzi utilizzabili. Perciò è possibile anche aggiungere molti altri host senza modificare la subnet-mask o le regole di routing. Di seguito i vari indirizzamenti:
 
+|    Dispositivo   |    Maschera di rete   | Indirizzo di rete |
+|:----------------:|:---------------------:|:-----------------:|
+|    **Host-a**    | /23 - 255.255.254.0   |     145.10.1.0     |
+|    **Host-b**    | /24 - 255.255.255.0   |     145.11.1.0     |
+|    **Router-1 <--> Router-2**  | /30 - 255.255.255.252 |   145.12.1.0  | 
+|    **Host-c**    | /25 - 255.255.255.128 |      123.0.1.0     |
+
 #### Sottorete di Host-A
  Sono richiesti almeno 291 possibili indirizzi utilizzabili perciò assegno all'host-a l'indirizzo **145.10.1.1/23** in    questo modo la sottorete può supportare fino 509 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-1 per la Vlan.
 
 #### Sottorete di Host-B
- Sono richiesti almeno 176 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **145.11.1.0/24** in    questo modo la sottorete può supportare fino 254 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-2 per la Vlan.
+ Sono richiesti almeno 176 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **145.11.1.1/24** in    questo modo la sottorete può supportare fino 254 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-2 per la Vlan.
 
 #### Sottorete di Host-C
- Sono richiesti almeno 95 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **123.0.1.0/25** in      questo modo la sottorete può supportare fino 126 indirizzi più uno di broadcast e uno di rete. 
+ Sono richiesti almeno 95 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **123.0.1.2/25** in      questo modo la sottorete può supportare fino 126 indirizzi più uno di broadcast e uno di rete. 
 
 #### Sottorete tra Router-1 e Router-2
  Ai due router collegati è possibile assegnare una /30 rete, in questo caso ho assegnato al router-1 l'indirizzo **145.12.1.1/30** e al router-2 l'indirizzo **145.12.1.2/30**.
 
 ### Impostazione delle VLAN:
- Per la configurazione delle Vlan devo aggiungere allo switch le porte con il tag 10 corrispondente all'host-a e con il tag 20 per l'host-b. Successivamente, per connettere il router-1 alle due Vlan, aggiungo un trunk link. Solo in questo modo l'host-a e l'host-b potranno comunicare, anche se sono in due Vlan differenti, tramite il router-1. 
+ Solamente l'host-a e l'host-b appartengono a due VLAN differenti, invece l'host-c non è associato a nessuna VLAN.  
+ Per la configurazione delle VLAN devo aggiungere allo switch le porte con il tag 10 corrispondente all'host-a e con il tag 20 per l'host-b. Successivamente, per connettere il router-1 alle due VLAN, aggiungo un trunk link. Solo in questo modo l'host-a e l'host-b potranno comunicare, anche se sono in due VLAN differenti, tramite il router-1. 
 
-### Interfacce corrispondenti allo schema della rete (in alto):
+#### Interfacce corrispondenti allo schema della rete (in alto):
 - eth0 = enp0s3
 - eth1 = enp0s8
 - eth2 = enp0s9
 - eth3 = enp0s10
 
-#### Configurazione host-A:
-- Aggiunto l'indirizzo IP: 145.10.1.0/23 su interfaccia enp0s8
+### Descrizione della configurazione dei vari dispositivi:
+
+#### Host-A
+- Aggiunto l'indirizzo IP: 145.10.1.1/23 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate automaticamente
-- 
+- Aggiungo la rotta di default verso il router-1 all'indirizzo 145.10.1.2 per la VLAN 10
 
-
-
-
-### Host-B
-- Aggiunto l'indirizzo IP: 145.11.1.0/24 su interfaccia enp0s8
+#### Host-B
+- Aggiunto l'indirizzo IP: 145.11.1.1/24 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate automaticamente
-### Host-C
-- Aggiunto l'indirizzo IP: 123.0.1.0/25 su interfaccia enp0s8
+- Aggiungo la rotta di default verso il router-1 all'indirizzo 145.11.1.2 per la VLAN 20
+
+#### Host-C
+- Aggiunto l'indirizzo IP: 123.0.1.2/25 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate automaticamente
+- Aggiungo la rotta di default verso il router-2 all'indirizzo 123.0.1.1
+
 ### Switch
 - Inserisco il comando per ridefinire l'host in modo che lavori come uno switch
-- Aggiungo la porta enp0s8 configurata sulla vlan taggata con 10
+- Aggiungo la porta enp0s9 configurata sulla VLAN taggata con 10
+- Aggiungo la porta enp0s10 configurata sulla VLAN taggata con 20
 - Attivo la porta appena creata
 
 
