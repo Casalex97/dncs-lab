@@ -7,6 +7,9 @@
 # you're doing.
 Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
+  #aggiunto
+  #config.vm.network "forwarded_port", guest: 80, host: 8080
+  #aggiunto
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--usb", "on"]
     vb.customize ["modifyvm", :id, "--usbehci", "off"]
@@ -21,7 +24,7 @@ Vagrant.configure("2") do |config|
     router1.vm.hostname = "router-1"
     router1.vm.network "private_network", virtualbox__intnet: "broadcast_router-south-1", auto_config: false
     router1.vm.network "private_network", virtualbox__intnet: "broadcast_router-inter", auto_config: false
-    router1.vm.provision "shell", path: "common.sh", run: 'always'
+    router1.vm.provision "shell", path: "router-1.sh", run: 'always'
     router1.vm.provider "virtualbox" do |vb|
       vb.memory = 256
     end
@@ -31,7 +34,7 @@ Vagrant.configure("2") do |config|
     router2.vm.hostname = "router-2"
     router2.vm.network "private_network", virtualbox__intnet: "broadcast_router-south-2", auto_config: false
     router2.vm.network "private_network", virtualbox__intnet: "broadcast_router-inter", auto_config: false
-    router2.vm.provision "shell", path: "common.sh", run: 'always'
+    router2.vm.provision "shell", path: "router-2.sh", run: 'always'
     router2.vm.provider "virtualbox" do |vb|
       vb.memory = 256
     end
@@ -69,9 +72,12 @@ Vagrant.configure("2") do |config|
     hostc.vm.box = "ubuntu/bionic64"
     hostc.vm.hostname = "host-c"
     hostc.vm.network "private_network", virtualbox__intnet: "broadcast_router-south-2", auto_config: false
+    #aggiunto
+    #hostc.vm.network "private_network", virtualbox__intnet: "broadcast_host_a", auto_config: false
+    #aggiunto
     hostc.vm.provision "shell", path: "host-c.sh",  run: 'always'
     hostc.vm.provider "virtualbox" do |vb|
-      vb.memory = 512
+    vb.memory = 512
     end
   end
 end

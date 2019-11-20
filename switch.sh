@@ -11,12 +11,11 @@ sudo ip link set enp0s10 up
 sudo ip link set ovs-system up
 sudo ip link set switch up
 
-# The access ports
+#access ports
 sudo ovs-vsctl --may-exist add-port switch enp0s9 tag=10
 sudo ovs-vsctl --may-exist add-port switch enp0s10 tag=20
 
-# And the trunk link 
+#trunk link 
 sudo ovs-vsctl --may-exist add-port switch enp0s8
-
 
 
