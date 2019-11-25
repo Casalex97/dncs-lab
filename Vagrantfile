@@ -72,9 +72,6 @@ Vagrant.configure("2") do |config|
     hostc.vm.box = "ubuntu/bionic64"
     hostc.vm.hostname = "host-c"
     hostc.vm.network "private_network", virtualbox__intnet: "broadcast_router-south-2", auto_config: false
-    #aggiunto
-    #hostc.vm.network "private_network", virtualbox__intnet: "broadcast_host_a", auto_config: false
-    #aggiunto
     hostc.vm.provision "shell", path: "host-c.sh",  run: 'always'
     hostc.vm.provider "virtualbox" do |vb|
     vb.memory = 512
