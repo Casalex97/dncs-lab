@@ -188,7 +188,7 @@ The assignment deliverable consists of a Github repository containing:
 - Aggiunto l'indirizzo IP: 145.11.1.2/24 sull'interfaccia enp0s8.20
 - Aggiunto l'indirizzo IP: 145.12.1.1/30  sull'interfaccia enp0s9
 - Elimino le rotte configurate di default
-- Aggiungo una rotta di NEXT-HOP che permette a determinari pacchetti di essere reindirizzati verso l'interfaccia del router-2
+- Aggiungo una rotta di NEXT-HOP che permette a determinati pacchetti di essere reindirizzati verso l'interfaccia del router-2
 
 ### Router-2
 - Inserisco il comando per permettere al dispositivo di reindirizzare (forward) i pacchetti
@@ -197,12 +197,14 @@ The assignment deliverable consists of a Github repository containing:
 - Aggiunto l'indirizzo IP: 123.0.1.1/25 sull'interfaccia enp0s8
 - Aggiunto l'indirizzo IP: 145.12.1.2/30 sull'interfaccia enp0s9
 - Elimino le rotte configurate di default
-- Aggiungo la rotta di default all'indirizzo 145.12.1.1
+- Aggiungo la rotta di default all'indirizzo 145.12.1.1 cioè del router-1
 
 
 ## Docker image 
-- Nel vagrant file nella sezione dell'host-c ho modificato il valore per la RAM da 256 MB a 512 MB
-- Per verificare il corretto funzionamento del docker basta semplicemente eseguire il comando: curl 123.0.1.2 , dalle subnet dell'host-a o dell'host-b, questo comando permette di richiedere all'indirizzo dell'host-c la pagina del web-server attraverso la porta 80
+- Nel vagrant file nella sezione dell'host-c ho modificato il valore per la RAM da 256 MB a 512 MB, in questo modo ho verificato un migliore funzionamento del container-image di Docker
+- Per verificare il corretto funzionamento del docker basta semplicemente eseguire: curl 123.0.1.2 , dalle subnet dell'host-a o dell'host-b. Questo comando permette di richiedere all'indirizzo dell'host-c la pagina del web-server, in HTML, attraverso la porta 80
+
+
 
 
 
