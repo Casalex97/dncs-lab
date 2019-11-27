@@ -121,24 +121,24 @@ The assignment deliverable consists of a Github repository containing:
 ### Indirizzamento IP:
  Per avere il minore spreco possibile di indirizzi IP devo assegnare ai vari host e router le classi di indirizzi che permettono di ospitarne in numero immediatamente maggiore alla richiesta. In questo caso, ad esempio, per l'host-a si è dovuto assegnare, per rispettare i requisiti, una subnet che può contenere fino a 510 indirizzi utilizzabili. Perciò è possibile anche aggiungere molti altri host senza modificare la subnet-mask o le regole di routing. Di seguito i vari indirizzamenti:
 
-|    Dispositivo   |    Maschera di rete   | Indirizzo di rete |
+|    Dispositivo/Sottorete   |    Maschera di rete   | Indirizzo di rete |
 |:----------------:|:---------------------:|:-----------------:|
-|    **Host-a**    | /23 - 255.255.254.0   |     145.10.1.0    |
-|    **Host-b**    | /24 - 255.255.255.0   |     145.11.1.0    |
-|    **Router-1 <--> Router-2**  | /30 - 255.255.255.252 |   145.12.1.0  | 
-|    **Host-c**    | /25 - 255.255.255.128 |      123.0.1.0    |
+|    **Host-a**    | /23 - 255.255.254.0   |     172.16.0.0    |
+|    **Host-b**    | /24 - 255.255.255.0   |     172.16.2.0    |
+|    **Router-1 <--> Router-2**  | /30 - 255.255.255.252 |   172.16.3.128  | 
+|    **Host-c**    | /25 - 255.255.255.128 |     172.16.3.0    |
 
 #### Sottorete di Host-A
- Sono richiesti almeno 291 possibili indirizzi utilizzabili perciò assegno all'host-a l'indirizzo **145.10.1.1/23** in    questo modo la sottorete può supportare fino 509 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-1 per la Vlan.
+ Sono richiesti almeno 291 possibili indirizzi utilizzabili perciò assegno all'host-a l'indirizzo **172.16.0.2/23** in    questo modo la sottorete può supportare fino 507 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-1 per la VLAN.
 
 #### Sottorete di Host-B
- Sono richiesti almeno 176 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **145.11.1.1/24** in    questo modo la sottorete può supportare fino 254 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-2 per la Vlan.
+ Sono richiesti almeno 176 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **172.16.2.2/24** in    questo modo la sottorete può supportare fino 252 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-1 per la VLAN.
 
 #### Sottorete di Host-C
- Sono richiesti almeno 95 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **123.0.1.2/25** in      questo modo la sottorete può supportare fino 126 indirizzi più uno di broadcast e uno di rete. 
+ Sono richiesti almeno 95 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **172.16.3.2/25** in      questo modo la sottorete può supportare fino 124 indirizzi più uno di broadcast e uno di rete e infine uno riservato al router-2 cioè il gateway.
 
 #### Sottorete tra Router-1 e Router-2
- Ai due router collegati è possibile assegnare una /30 rete, in questo caso ho assegnato al router-1 l'indirizzo **145.12.1.1/30** e al router-2 l'indirizzo **145.12.1.2/30**.
+ Ai due router collegati è possibile assegnare una /30 rete, in questo caso ho assegnato al router-1 l'indirizzo **172.16.3.129/30** e al router-2 l'indirizzo **172.16.3.130/30**.
 
 ### Impostazione delle VLAN:
  Solamente l'host-a e l'host-b appartengono a due VLAN differenti, invece l'host-c non è associato a nessuna VLAN.  
@@ -153,24 +153,24 @@ The assignment deliverable consists of a Github repository containing:
 ### Descrizione della configurazione dei vari dispositivi:
 
 #### Host-A
-- Aggiunto l'indirizzo IP: 145.10.1.1/23 su interfaccia enp0s8
+- Aggiunto l'indirizzo IP: 172.16.0.2/23 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate di default
-- Aggiungo la rotta di default verso il router-1 all'indirizzo 145.10.1.2 per la VLAN 10
+- Aggiungo la rotta di default verso il router-1 all'indirizzo 172.16.0.1 per la VLAN 10
 
 #### Host-B
-- Aggiunto l'indirizzo IP: 145.11.1.1/24 su interfaccia enp0s8
+- Aggiunto l'indirizzo IP: 172.16.2.2/24 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate di default
-- Aggiungo la rotta di default verso il router-1 all'indirizzo 145.11.1.2 per la VLAN 20
+- Aggiungo la rotta di default verso il router-1 all'indirizzo 172.16.2.1 per la VLAN 20
 
 #### Host-C
 - Installo docker e faccio il pull dell'immagine: dustnic82/nginx-test
 - Do il comando per avviare in background il web server di nginx, in modo che sia raggiungibile dagli altri host attraverso la porta 80
-- Aggiunto l'indirizzo IP: 123.0.1.2/25 su interfaccia enp0s8
+- Aggiunto l'indirizzo IP: 172.16.3.2/25 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate di default
-- Aggiungo la rotta di default verso il router-2 all'indirizzo 123.0.1.1
+- Aggiungo la rotta di default verso il router-2 all'indirizzo 172.16.3.1
 
 ### Switch
 - Inserisco il comando per ridefinire l'host in modo che lavori come uno switch (sudo ovs-vsctl add-br switch
@@ -184,25 +184,25 @@ The assignment deliverable consists of a Github repository containing:
 - Inserisco il comando per permettere al dispositivo di reindirizzare(forward) i pacchetti
 - Aggiungo e attivo le porte enp0s8.10 e enp0s8.20 corrispondenti alle VLAN taggate con 10 e 20
 - Aggiungo e attivo la porta enp0s9 che servirà come collegamento per il router-2
-- Aggiunto l'indirizzo IP: 145.10.1.2/23 sull'interfaccia enp0s8.10
-- Aggiunto l'indirizzo IP: 145.11.1.2/24 sull'interfaccia enp0s8.20
-- Aggiunto l'indirizzo IP: 145.12.1.1/30  sull'interfaccia enp0s9
+- Aggiunto l'indirizzo IP: 172.16.0.1/23 sull'interfaccia enp0s8.10
+- Aggiunto l'indirizzo IP: 172.16.2.1/24 sull'interfaccia enp0s8.20
+- Aggiunto l'indirizzo IP: 172.16.3.129/30  sull'interfaccia enp0s9
 - Elimino le rotte configurate di default
-- Aggiungo una rotta di NEXT-HOP che permette a determinati pacchetti di essere reindirizzati verso l'interfaccia del router-2
+- Aggiungo una rotta di NEXT-HOP che permette al pacchetto di destinazione host-c di essere reindirizzati verso l'interfaccia del router-2
 
 ### Router-2
 - Inserisco il comando per permettere al dispositivo di reindirizzare (forward) i pacchetti
 - Aggiungo e attivo la porta enp0s9 
 - Aggiungo e attivo la porta enp0s8 
-- Aggiunto l'indirizzo IP: 123.0.1.1/25 sull'interfaccia enp0s8
-- Aggiunto l'indirizzo IP: 145.12.1.2/30 sull'interfaccia enp0s9
+- Aggiunto l'indirizzo IP: 172.16.3.1/25 sull'interfaccia enp0s8
+- Aggiunto l'indirizzo IP: 172.16.3.130/30 sull'interfaccia enp0s9
 - Elimino le rotte configurate di default
-- Aggiungo la rotta di default all'indirizzo 145.12.1.1 cioè del router-1
+- Aggiungo la rotta di default all'indirizzo 172.16.3.129 cioè quello del router-1
 
 
 ## Docker image 
 - Nel vagrant file nella sezione dell'host-c ho modificato il valore per la RAM da 256 MB a 512 MB, in questo modo ho verificato un migliore funzionamento del container-image di Docker
-- Per verificare il corretto funzionamento del docker basta semplicemente eseguire: curl 123.0.1.2 , dalle subnet dell'host-a o dell'host-b. Questo comando permette di richiedere all'indirizzo dell'host-c la pagina del web-server, in HTML, attraverso la porta 80
+- Per verificare il corretto funzionamento del docker basta semplicemente eseguire: " curl 172.16.3.2 ", dalle subnet dell'host-a o dell'host-b. Questo comando permette di richiedere all'indirizzo dell'host-c la pagina del web-server, in HTML, attraverso la porta 80.
 
 
 

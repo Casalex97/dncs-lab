@@ -1,8 +1,6 @@
 export DEBIAN_FRONTEND=noninteractive
-# Startup commands go here for host-a
+# Startup commands go here for host-c
 
-
-#aggiunto per installare docker
 sudo apt-get update
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common --assume-yes 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -14,12 +12,10 @@ sudo systemctl status docker
 docker pull dustnic82/nginx-test
 sudo docker run --name nginx-test -p 80:80 -d nginx
 
-#startup command goes here
 ip link set dev enp0s8 up
-ip addr add 123.0.1.2/25 dev enp0s8
+ip addr add 172.16.3.2/25 dev enp0s8
 ip route del default
-ip route add default via 123.0.1.1
-
+ip route add default via 172.16.3.1
 
 
 
