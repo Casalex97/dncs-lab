@@ -119,7 +119,7 @@ The assignment deliverable consists of a Github repository containing:
 # Assignment Design description:
 
 ### Indirizzamento IP:
- Per avere il minore spreco possibile di indirizzi IP devo assegnare ai vari host e router le classi di indirizzi che permettono di ospitarne in numero immediatamente maggiore alla richiesta. In questo caso, ad esempio, per l'host-a si è dovuto assegnare, per rispettare i requisiti, una subnet che può contenere fino a 510 indirizzi utilizzabili. Perciò è possibile anche aggiungere molti altri host senza modificare la subnet-mask o le regole di routing. Di seguito i vari indirizzamenti:
+ Per avere il minore spreco possibile di indirizzi IP devo assegnare ai vari host e router le classi di indirizzi che permettono di ospitarne in numero immediatamente maggiore alla richiesta. In questo caso, ad esempio, per l'host-a si è dovuto assegnare, per rispettare i requisiti, una subnet che può contenere fino a 507 indirizzi utilizzabili. Perciò è possibile anche aggiungere molti altri host senza modificare la subnet-mask o gli indirizzi dei dispositivi. Di seguito i vari indirizzamenti:
 
 |    Dispositivo/Sottorete   |    Maschera di rete   | Indirizzo di rete |
 |:----------------:|:---------------------:|:-----------------:|
