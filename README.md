@@ -118,53 +118,82 @@ The assignment deliverable consists of a Github repository containing:
 
 # Assignment Design description:
 
-### Indirizzamento IP:
- Per avere il minore spreco possibile di indirizzi IP devo assegnare ai vari host e router le classi di indirizzi che permettono di ospitarne in numero immediatamente maggiore alla richiesta. In questo caso, ad esempio, per l'host-a si è dovuto assegnare, per rispettare i requisiti, una subnet che può contenere fino a 507 indirizzi utilizzabili. Perciò è possibile anche aggiungere molti altri host senza modificare la subnet-mask o gli indirizzi dei dispositivi. Di seguito i vari indirizzamenti:
+### IP addressing:
+ To have the least possible usage of IP address I have to assign, to the hosts and routers, the address class that are able to accomodate in a number immediatly greater then the request. In this case, for example, to the host-a I have assigned, in order to respect requirements, a 507 usable subnet adresses. Therefore it is also possible to add other hosts without change the subnet-mask and the ip adresses. The table below shows the network's IP:
 
-|    Dispositivo/Sottorete   |    Maschera di rete   | Indirizzo di rete |
+
+ Per avere il minore spreco possibile di indirizzi IP devo assegnare ai vari host e router le classi di indirizzi che permettono di ospitarne in numero immediatamente maggiore alla richiesta. In questo caso, ad esempio, per l'host-a si è dovuto assegnare, per rispettare i requisiti, una subnet che può contenere fino a 507 indirizzi utilizzabili. Perciò è possibile anche aggiungere molti altri host senza modificare la subnet-mask e gli indirizzi dei dispositivi. Di seguito i vari indirizzamenti:
+
+|    Device/Subnet   |    Subnet mask   | Network address |
 |:----------------:|:---------------------:|:-----------------:|
 |    **Host-a**    | /23 - 255.255.254.0   |     172.16.0.0    |
 |    **Host-b**    | /24 - 255.255.255.0   |     172.16.2.0    |
 |    **Router-1 <--> Router-2**  | /30 - 255.255.255.252 |   172.16.3.128  | 
 |    **Host-c**    | /25 - 255.255.255.128 |     172.16.3.0    |
 
-#### Sottorete di Host-A
+#### Host-A subnet
+ About 291 possible usable addresses are required, so i have assigned to the host-a the address: **172.16.0.2/23** in this whay the subnet can support up to 507 addresses. The brodcast, network and router-1 addresses is add to this addresses.
+
+
  Sono richiesti almeno 291 possibili indirizzi utilizzabili perciò assegno all'host-a l'indirizzo **172.16.0.2/23** in    questo modo la sottorete può supportare fino 507 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-1 per la VLAN.
 
-#### Sottorete di Host-B
+#### Host-B subnet
  Sono richiesti almeno 176 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **172.16.2.2/24** in    questo modo la sottorete può supportare fino 252 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-1 per la VLAN.
 
-#### Sottorete di Host-C
+#### Host-C subnet
  Sono richiesti almeno 95 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **172.16.3.2/25** in      questo modo la sottorete può supportare fino 124 indirizzi più uno di broadcast e uno di rete e infine uno riservato al router-2 cioè il gateway.
 
-#### Sottorete tra Router-1 e Router-2
+#### Subnet between Router-1 e Router-2
  Ai due router collegati è possibile assegnare una /30 rete, in questo caso ho assegnato al router-1 l'indirizzo **172.16.3.129/30** e al router-2 l'indirizzo **172.16.3.130/30**.
 
-### Impostazione delle VLAN:
+ To the two router connected is possible to assign a /30 subnet. In this case i assigned to router-1 the **172.16.3.129/30** addresses and for router-2 the address **172.16.3.130/30**.
+
+### VLAN configuration:
  Solamente l'host-a e l'host-b appartengono a due VLAN differenti, invece l'host-c non è associato a nessuna VLAN.  
  Per la configurazione delle VLAN devo aggiungere allo switch le porte con il tag 10 corrispondente all'host-a e con il tag 20 per l'host-b. Successivamente, per connettere il router-1 alle due VLAN, aggiungo un trunk link. Solo in questo modo l'host-a e l'host-b potranno comunicare, anche se sono in due VLAN differenti, tramite il router-1. Quest'ultimo comunica con lo switch collegandosi alla porta con il tag 10 o 20 in base alla VLAN di destinazionennnn
 
-#### Interfacce corrispondenti allo schema della rete (in alto):
+A different VLAN is associated for the host-a and host-b, instead the host-c is not a part of a VLAN.
+For the VLAN configuration i have to add to the switch the port with tag 10 which match with host-a and the port with tag 20 for host-b. After this, i need to add a trunk link between router-1 and switch for VLAN connection. Only in this way can host-a and host-b communicate through the router-1, although they are in two different VLANs. Router-1 is connected to the router with ports 20 and 10 based on belonging VLAN.
+
+#### Interface corresponding to the network scheme (up):
 - eth0 = enp0s3
 - eth1 = enp0s8
 - eth2 = enp0s9
 - eth3 = enp0s10
 
 ### Descrizione della configurazione dei vari dispositivi:
+### Configuration description of devices:
 
 #### Host-A
+- Added IP addres: 172.16.0.2/23 over enp0s8 interface
+- Enp0s8 port connection enabled
+- Delete routes configure by default
+- Add the default route to router-1 address 172.16.0.1 for VLAN 10
+ 
 - Aggiunto l'indirizzo IP: 172.16.0.2/23 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate di default
 - Aggiungo la rotta di default verso il router-1 all'indirizzo 172.16.0.1 per la VLAN 10
 
 #### Host-B
+- Added IP addres: 172.16.2.2/24 over enp0s8 interface
+- Enp0s8 port connection enabled
+- Delete routes configure by default
+- Add the default route to router-1 address 172.16.2.1 for VLAN 20
+
 - Aggiunto l'indirizzo IP: 172.16.2.2/24 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
 - Elimino le rotte configurate di default
 - Aggiungo la rotta di default verso il router-1 all'indirizzo 172.16.2.1 per la VLAN 20
 
 #### Host-C
+- Docker istall commands and pull of the image: dustnic82/nginx-test
+- I provide the command to start the nginx web server in the background, so that it can be reached by other hosts via port 80
+- Added IP addres: 172.16.3.2/25 over enp0s8 interface
+- Enp0s8 port connection enabled
+- Delete routes configure by default
+- Add the default route to router-2 address 172.16.3.1
+
 - Installo docker e faccio il pull dell'immagine: dustnic82/nginx-test
 - Do il comando per avviare in background il web server di nginx, in modo che sia raggiungibile dagli altri host attraverso la porta 80
 - Aggiunto l'indirizzo IP: 172.16.3.2/25 su interfaccia enp0s8
@@ -173,8 +202,13 @@ The assignment deliverable consists of a Github repository containing:
 - Aggiungo la rotta di default verso il router-2 all'indirizzo 172.16.3.1
 
 ### Switch
-- Inserisco il comando per ridefinire l'host in modo che lavori come uno switch (sudo ovs-vsctl add-br switch
-)
+- I provide the command to redefine host that it can work like a switch (sudo ovs-vsctl add-br switch)
+- I add the port enp0s9 configured on the VLAN tagged with 10
+- I add the port enp0s10 configured on the VLAN tagged with 20
+- Add the enp0s8 port that connects the switch to router-1 via a trunk link to pass different VLAN packets 
+- Activate all newly created ports and those already defined in the switch
+
+- Inserisco il comando per ridefinire l'host in modo che lavori come uno switch (sudo ovs-vsctl add-br switch)
 - Aggiungo la porta enp0s9 configurata sulla VLAN taggata con 10
 - Aggiungo la porta enp0s10 configurata sulla VLAN taggata con 20
 - Aggiungo la porta enp0s8 che connette lo switch al router-1 tramite un trunk-link per fare transitare i pacchetti di VLAN diverse
@@ -203,8 +237,5 @@ The assignment deliverable consists of a Github repository containing:
 ## Docker image 
 - Nel vagrant file nella sezione dell'host-c ho modificato il valore per la RAM da 256 MB a 512 MB, in questo modo ho verificato un migliore funzionamento del container-image di Docker
 - Per verificare il corretto funzionamento del docker basta semplicemente eseguire: " curl 172.16.3.2 ", dalle subnet dell'host-a o dell'host-b. Questo comando permette di richiedere all'indirizzo dell'host-c la pagina del web-server, in HTML, attraverso la porta 80.
-
-
-
 
 
