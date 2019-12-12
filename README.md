@@ -215,7 +215,10 @@ For the VLAN configuration i have to add to the switch the port with tag 10 whic
 - Attivo tutte porte appena create e quelle già definite nello switch
 
 ### Router-1
-- Inserisco il comando per permettere al dispositivo di reindirizzare(forward) i pacchetti
+- Insert the command to allow the device to redirect (forward) the packets
+-  
+
+- Inserisco il comando per permettere al dispositivo di reindirizzare (forward) i pacchetti
 - Aggiungo e attivo le porte enp0s8.10 e enp0s8.20 corrispondenti alle VLAN taggate con 10 e 20
 - Aggiungo e attivo la porta enp0s9 che servirà come collegamento per il router-2
 - Aggiunto l'indirizzo IP: 172.16.0.1/23 sull'interfaccia enp0s8.10
