@@ -132,15 +132,19 @@ The assignment deliverable consists of a Github repository containing:
 |    **Host-c**    | /25 - 255.255.255.128 |     172.16.3.0    |
 
 #### Host-A subnet
- About 291 possible usable addresses are required, so i have assigned to the host-a the address: **172.16.0.2/23** in this whay the subnet can support up to 507 addresses. The brodcast, network and router-1 addresses is add to this addresses.
+ About 291 possible usable addresses are required, so i have assigned to the host-a the address: **172.16.0.2/23** in this whay the subnet can support up to 507 addresses. The brodcast, network and router-1 (for VLAN) address is add to this addresses.
 
 
  Sono richiesti almeno 291 possibili indirizzi utilizzabili perciò assegno all'host-a l'indirizzo **172.16.0.2/23** in    questo modo la sottorete può supportare fino 507 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-1 per la VLAN.
 
 #### Host-B subnet
+ About 176 possible usable addresses are required, so i have assigned to the host-b the address: **172.16.2.2/24** in this whay the subnet can support up to 252 addresses. The brodcast, network and router-1 (for VLAN) addresses is add to this addresses.
+
  Sono richiesti almeno 176 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **172.16.2.2/24** in    questo modo la sottorete può supportare fino 252 indirizzi più uno di broadcast, uno di rete e infine uno riservato al router-1 per la VLAN.
 
 #### Host-C subnet
+ About 95 possible usable addresses are required, so i have assigned to the host-b the address: **172.16.3.2/25** in this whay the subnet can support up to 124 addresses. The brodcast, network and router-2 (gateway) addresses is add to this addresses.
+ 
  Sono richiesti almeno 95 possibili indirizzi utilizzabili perciò assegno all'host-b l'indirizzo **172.16.3.2/25** in      questo modo la sottorete può supportare fino 124 indirizzi più uno di broadcast e uno di rete e infine uno riservato al router-2 cioè il gateway.
 
 #### Subnet between Router-1 e Router-2
