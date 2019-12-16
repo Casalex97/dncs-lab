@@ -216,7 +216,13 @@ For the VLAN configuration i have to add to the switch the port with tag 10 whic
 
 ### Router-1
 - Insert the command to allow the device to redirect (forward) the packets
--  
+- Add and activate the ports enp0s8.10 and enp0s8.20 corresponding to the VLANs tagged with 10 and 20
+- Add and activate the port enp0s9 which will serve as a connection for router-2
+- Added IP addres: 172.16.0.1/23 over enp0s8.10 interface
+- Added IP addres: 172.16.2.1/24 over enp0s8.20 interface
+- Added IP addres: 172.16.3.129/30 over enp0s9 interface
+- Delete routes configure by default
+- Add a NEXT-HOP route that allows the host-c destination packet to be redirected to the router-2 interface
 
 - Inserisco il comando per permettere al dispositivo di reindirizzare (forward) i pacchetti
 - Aggiungo e attivo le porte enp0s8.10 e enp0s8.20 corrispondenti alle VLAN taggate con 10 e 20
@@ -228,17 +234,28 @@ For the VLAN configuration i have to add to the switch the port with tag 10 whic
 - Aggiungo una rotta di NEXT-HOP che permette al pacchetto di destinazione host-c di essere reindirizzati verso l'interfaccia del router-2
 
 ### Router-2
+- Insert the command to allow the device to redirect (forward) the packets
+- Enp0s8 port connection enabled
+- Enp0s9 port connection enabled
+- Added IP addres: 172.16.3.1/25 over enp0s8 interface
+- Added IP addres: 172.16.3.130/30 over enp0s9 interface
+- Delete routes configure by default
+- Add default route with IP addres 172.16.3.129 (router-1 addres towards router-2)
+
 - Inserisco il comando per permettere al dispositivo di reindirizzare (forward) i pacchetti
 - Aggiungo e attivo la porta enp0s9 
 - Aggiungo e attivo la porta enp0s8 
 - Aggiunto l'indirizzo IP: 172.16.3.1/25 sull'interfaccia enp0s8
 - Aggiunto l'indirizzo IP: 172.16.3.130/30 sull'interfaccia enp0s9
 - Elimino le rotte configurate di default
-- Aggiungo la rotta di default all'indirizzo 172.16.3.129 cioè quello del router-1
+- Aggiungo la rotta di default all'indirizzo 172.16.3.129 cioè quello del router-1 
 
 
 ## Docker image 
-- Nel vagrant file nella sezione dell'host-c ho modificato il valore per la RAM da 256 MB a 512 MB, in questo modo ho verificato un migliore funzionamento del container-image di Docker
+- To verify the correct working of Docker simply execute: "curl 172.16.3.2", in the host-a or host-b subnet
+- This command is able to request to host-c addres the web server page, it displayed with HTML, trough 80 port
+- This command allows to request the web-server page, in HTML, through the port 80 for the host-c address
+
 - Per verificare il corretto funzionamento del docker basta semplicemente eseguire: " curl 172.16.3.2 ", dalle subnet dell'host-a o dell'host-b. Questo comando permette di richiedere all'indirizzo dell'host-c la pagina del web-server, in HTML, attraverso la porta 80.
 
 
