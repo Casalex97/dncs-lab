@@ -1,0 +1,18 @@
+FirstName: Alessandro
+LastName: Casagrande
+MatriculationNumber: 187669
+AcademicYear: 2019-2020
+GitHubUrl: https://github.com/Casalex97/dncs-lab
+Subnets:
+  HostsA: 
+    RequiredAddresses: 291
+    SubnetAddress: 172.16.0.0
+    SubnetPrefixLength: 23
+  HostsB:
+    RequiredAddresses: 176
+    SubnetAddress: 172.16.2.0 
+    SubnetPrefixLength: 24
+  HostsC:
+    RequiredAddresses: 95
+    SubnetAddress: 172.16.3.0
+    SubnetPrefixLength: 25
