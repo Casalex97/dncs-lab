@@ -187,7 +187,7 @@ For the VLAN configuration i have to add to the switch the port with tag 10 whic
 
 - Aggiunto l'indirizzo IP: 172.16.2.2/24 su interfaccia enp0s8
 - Attivo il collegamento della porta enp0s8
-- Elimino le rotte configurate di default
+- Elimino le rotte configurate di default 
 - Aggiungo la rotta di default verso il router-1 all'indirizzo 172.16.2.1 per la VLAN 20
 
 #### Host-C
