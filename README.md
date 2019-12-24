@@ -122,7 +122,7 @@ The assignment deliverable consists of a Github repository containing:
  To use the least possible number of IP address
  To have the least possible usage (waste) of IP address I have to assign, to the hosts and routers, the address class that are able to accomodate in a number immediatly greater then the request. In this case, for example, to the host-a I have assigned, in order to respect requirements, a 507 usable subnet adresses. Therefore it is also possible to add other hosts without change the subnet-mask and the ip adresses. The table below shows the network's IP:
 
-|    Device/Subnet   |    Subnet mask   | Network address |
+|   Device/Subnet  |    Subnet mask        | Network address   |
 |:----------------:|:---------------------:|:-----------------:|
 |    **Host-a**    | /23 - 255.255.254.0   |     172.16.0.0    |
 |    **Host-b**    | /24 - 255.255.255.0   |     172.16.2.0    |
